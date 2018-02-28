@@ -1,3 +1,5 @@
+var urlBase = "http://h2744356.stratoserver.net/denis/APIMusic/public/index.php/";
+
 function Register() {
   
   var name = document.getElementById('nameRes').value;
@@ -8,7 +10,7 @@ function Register() {
   if(name != "" && pass != "" && email != "")
   {
   connection = CreateRequest();
-var url = "http://localhost/APIMusic/public/index.php/user/create.json";
+  var url = urlBase + "user/create.json";
   connection.onreadystatechange = response;
   
  
@@ -25,7 +27,7 @@ function AddToList(id_song, id_list) {
 	var params = "id_song=" + id_song + "&id_list=" + id_list;
 	
   connection = CreateRequest();
-var url = "http://localhost/APIMusic/public/index.php/list/add.json";
+var url = urlBase + "list/add.json";
   connection.onreadystatechange = response;
   
  
@@ -76,13 +78,13 @@ function response() {
           refresh();
       }
 
-		  if(window.location.href == "http://localhost/Web_music/" || window.location.href == "http://localhost/Web_music/index.html"){
+		  if(window.location.href == "http://h2744356.stratoserver.net/denis/musicWebPanel/" || window.location.href == "http://h2744356.stratoserver.net/denis/musicWebPanel/index.html"){
         if(response.message == "Usuario creado con exito"){
           ShowModal("Enhorabuena", "Te has registrado con exito")
         }
         else
         {
-          window.location.href = "http://localhost/Web_music/panel.html";
+          window.location.href = "http://h2744356.stratoserver.net/denis/musicWebPanel/panel.html";
         }
   		}
   	}
@@ -96,7 +98,7 @@ function response() {
 function GetSongs() {
 
   connection = CreateRequest();
- var url = "http://localhost/APIMusic/public/index.php/list/songs.json";
+ var url = urlBase + "list/songs.json";
   connection.onreadystatechange = response;
  
   connection.open('GET', url);
@@ -114,7 +116,7 @@ function Login() {
   connection = CreateRequest();
  
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/user/login.json?" + 'name=' + userName + '&pass=' + password;
+  var url = urlBase + "user/login.json?" + 'name=' + userName + '&pass=' + password;
  
   connection.open('GET', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -126,7 +128,7 @@ function GetLists() {
   connection = CreateRequest();
  
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/list/lists.json";
+  var url = urlBase + "list/lists.json";
  
   connection.open('GET', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -142,7 +144,7 @@ function DeleteListRequest(id) {
   connection = CreateRequest();
 
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/list/delete.json";
+  var url = urlBase + "list/delete.json";
  
   connection.open('POST', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -158,7 +160,7 @@ function upReproductions(id) {
   connection = CreateRequest();
 
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/song/upReproductions.json";
+  var url = urlBase + "song/upReproductions.json";
  
   connection.open('POST', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -174,7 +176,7 @@ function DeleteSongRequest(id_song, id_list) {
   connection = CreateRequest();
 
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/list/removeFromList.json";
+  var url = urlBase + "list/removeFromList.json";
  
   connection.open('POST', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -190,7 +192,7 @@ function DeleteSongFromDB(id) {
   connection = CreateRequest();
 
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/song/delete.json";
+  var url = urlBase + "song/delete.json";
  
   connection.open('POST', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -213,7 +215,7 @@ function CreateSong() {
   connection = CreateRequest();
 
   connection.onreadystatechange = response;
-  var url = "http://localhost/APIMusic/public/index.php/song/create.json";
+  var url = urlBase + "song/create.json";
  
   connection.open('POST', url);
   connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -236,7 +238,7 @@ function CreateList() {
   	var params = "name=" + name;
 	
   connection = CreateRequest();
-var url = "http://localhost/APIMusic/public/index.php/list/create.json";
+var url = urlBase + "list/create.json";
   connection.onreadystatechange = response;
   
  
