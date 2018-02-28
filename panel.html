@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Denis Menéndez - Panel admin</title>
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/myStyle.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body style="padding-top: 20px;">
+      
+    
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+          <h1>Mis listas</h1>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          </div>
+          </div>
+
+          <div class="col-xs-12 col-md-6" id="contSongs">
+            <h1>Canciones</h1>
+
+            <div class="panel-group" id="accordionSongs" role="tablist" aria-multiselectable="true">
+            </div>
+          </div>
+
+
+          </div>
+
+          <div class="col-xs-12 col-md-6" id="form_list">
+          <h2>Crear lista</h2>
+            <div class="form-horizontal" >
+              <div class="form-group">
+                <label class="control-label col-md-4">Nombre</label>
+                <div class="col-md-7">
+                    <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-md-6">
+                    <button type="submit" class="btn btn-primary" onclick="CreateList();">Crear</button>
+                   
+                </div>
+              </div>
+            </div>
+            </div>
+
+          <div class="col-xs-12 col-md-6" id="form_song">
+          <h2>Crear cancion</h2>
+            <div class="form-horizontal" >
+              <div class="form-group">
+                <label class="control-label col-md-4">Nombre</label>
+                <div class="col-md-7">
+                    <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-4">Artista</label>
+                <div class="col-md-7">
+                    <input type="text" name="artist" class="form-control" id="artist" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-4">Youtube URL</label>
+                <div class="col-md-7">
+                    <input type="text" name="urlSong" class="form-control" id="urlSong" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-md-6">
+                    <button type="submit" class="btn btn-primary" onclick="CreateSong();refresh();">Crear</button>
+                    
+                </div>
+              </div>
+            </div>
+            </div>
+
+            
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="DeleteChildrens();"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title bitter" id="myModalLabel">
+                    
+                </h4>
+              </div>
+              <div class="modal-body">
+                <p id="myModalbody" class="bitter"></p>
+                <div id=modalList class="list-group">
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button id="buttonModal" type="submit" class="btn btn-default" data-dismiss="modal" onclick="DeleteChildrens();">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end Modal -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/peticiones.js"></script>
+        <script src="js/utils.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#myModal').modal({ show: false})
+                GetLists();
+                if(localStorage.getItem("rol") == 'standard'){
+                 //GetSongs();
+                  $('#form_song').remove();
+                }
+                else
+                {
+                  $('#contSongs').remove();
+                  $('#form_list').remove();
+                }
+            });
+            $('#myModal').on('hide.bs.modal', function(){
+              DeleteChildrens();
+              //window.location.reload();
+            });
+            function DeleteChildrens(){if($('#modalList') != null){$('#modalList').children().remove();}}
+            function refresh(){
+              window.location.reload();
+            }
+        </script>
+    </body>
+</html>
